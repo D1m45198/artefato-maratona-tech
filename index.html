@@ -1,0 +1,2383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Análise de Artefato Digital - Deepfake e Eleições
+    </title>
+
+
+    <style>
+
+        /* =========================================================
+           PALETA DE CORES
+           =========================================================
+
+           Creme:      #F2E6D8
+           Cinza:      #615F6D
+           Terracota:  #A67153
+           Marrom:     #594A3C
+           Escuro:     #26241E
+
+           Cores complementares:
+           Verde:      #52685A
+           Vermelho:   #8B4B45
+           Branco:     #FFFFFF
+        */
+
+
+        :root {
+
+            --creme: #F2E6D8;
+
+            --cinza: #615F6D;
+
+            --terracota: #A67153;
+
+            --marrom: #594A3C;
+
+            --escuro: #26241E;
+
+            --verde: #52685A;
+
+            --vermelho: #8B4B45;
+
+            --branco: #FFFFFF;
+
+            --cinza-claro: #E8E4DF;
+
+            --cinza-texto: #4D4945;
+
+        }
+
+
+        /* =========================================================
+           CONFIGURAÇÕES GERAIS
+           ========================================================= */
+
+        * {
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: var(--creme);
+
+            color: var(--escuro);
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================================================
+           CABEÇALHO
+           ========================================================= */
+
+        header {
+
+            background: var(--escuro);
+
+            color: var(--creme);
+
+            padding: 55px 20px;
+
+            text-align: center;
+
+            border-bottom: 7px solid var(--terracota);
+
+        }
+
+
+        .categoria {
+
+            display: inline-block;
+
+            background: var(--terracota);
+
+            color: white;
+
+            padding: 8px 18px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        header h1 {
+
+            max-width: 950px;
+
+            margin: auto;
+
+            font-size: 42px;
+
+            line-height: 1.2;
+
+        }
+
+
+        header p {
+
+            max-width: 780px;
+
+            margin: 20px auto 0;
+
+            color: #DED6CE;
+
+            font-size: 17px;
+
+        }
+
+
+        /* =========================================================
+           MENU
+           ========================================================= */
+
+        nav {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+            background: var(--marrom);
+
+            padding: 12px;
+
+            text-align: center;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0, 0, 0, 0.15);
+
+        }
+
+
+        nav a {
+
+            color: var(--creme);
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            margin: 0 8px;
+
+            font-size: 14px;
+
+        }
+
+
+        nav a:hover {
+
+            color: white;
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================================================
+           ÁREA PRINCIPAL
+           ========================================================= */
+
+        main {
+
+            width: 92%;
+
+            max-width: 1100px;
+
+            margin: 45px auto;
+
+        }
+
+
+        /* =========================================================
+           CARTÕES DO RESUMO
+           ========================================================= */
+
+        .resumo {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .card {
+
+            background: white;
+
+            padding: 23px;
+
+            border-radius: 15px;
+
+            border-top: 5px solid var(--terracota);
+
+            box-shadow:
+                0 5px 20px
+                rgba(38, 36, 30, 0.10);
+
+        }
+
+
+        .card pequeno {
+
+            display: block;
+
+        }
+
+
+        .card h3 {
+
+            color: var(--cinza);
+
+            font-size: 13px;
+
+            margin-bottom: 7px;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .card strong {
+
+            color: var(--marrom);
+
+            font-size: 20px;
+
+        }
+
+
+        /* =========================================================
+           SEÇÕES
+           ========================================================= */
+
+        section {
+
+            background: white;
+
+            padding: 32px;
+
+            margin-bottom: 25px;
+
+            border-radius: 17px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(38, 36, 30, 0.08);
+
+        }
+
+
+        section h2 {
+
+            color: var(--marrom);
+
+            font-size: 25px;
+
+            border-bottom:
+                2px solid
+                var(--cinza-claro);
+
+            padding-bottom: 10px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        section h3 {
+
+            color: var(--terracota);
+
+            margin-top: 22px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        section p {
+
+            color: var(--cinza-texto);
+
+            margin-bottom: 14px;
+
+        }
+
+
+        ul,
+        ol {
+
+            padding-left: 25px;
+
+        }
+
+
+        li {
+
+            margin-bottom: 9px;
+
+            color: var(--cinza-texto);
+
+        }
+
+
+        /* =========================================================
+           DESTAQUE DO ARTEFATO
+           ========================================================= */
+
+        .artefato {
+
+            background: var(--escuro);
+
+            color: white;
+
+            border-radius: 17px;
+
+            padding: 32px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .artefato h2 {
+
+            color: var(--creme);
+
+            border-color: var(--cinza);
+
+        }
+
+
+        .artefato p {
+
+            color: #DED6CE;
+
+        }
+
+
+        .informacoes {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .info {
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            border-radius: 10px;
+
+            padding: 17px;
+
+        }
+
+
+        .info span {
+
+            display: block;
+
+            color: #BDB5AE;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .info strong {
+
+            color: white;
+
+        }
+
+
+        /* =========================================================
+           AVISO TÉCNICO
+           ========================================================= */
+
+        .aviso {
+
+            background: #F6EEE8;
+
+            border-left:
+                6px solid
+                var(--terracota);
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .aviso strong {
+
+            color: var(--marrom);
+
+        }
+
+
+        /* =========================================================
+           RESULTADO DA ANÁLISE
+           ========================================================= */
+
+        .resultado {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .resultado-card {
+
+            padding: 25px;
+
+            border-radius: 13px;
+
+        }
+
+
+        .verdade {
+
+            background: #E8EFE9;
+
+            border-left:
+                6px solid
+                var(--verde);
+
+        }
+
+
+        .risco {
+
+            background: #F3E5E0;
+
+            border-left:
+                6px solid
+                var(--vermelho);
+
+        }
+
+
+        .resultado-card h3 {
+
+            margin-top: 0;
+
+        }
+
+
+        .verdade h3 {
+
+            color: var(--verde);
+
+        }
+
+
+        .risco h3 {
+
+            color: var(--vermelho);
+
+        }
+
+
+        /* =========================================================
+           TABELA DE EVIDÊNCIAS
+           ========================================================= */
+
+        .tabela {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 20px;
+
+            min-width: 650px;
+
+        }
+
+
+        th,
+        td {
+
+            padding: 14px;
+
+            border: 1px solid #DDD8D2;
+
+            text-align: left;
+
+        }
+
+
+        th {
+
+            background: var(--marrom);
+
+            color: white;
+
+        }
+
+
+        tr:nth-child(even) {
+
+            background: #F8F5F2;
+
+        }
+
+
+        /* =========================================================
+           LINHA DO TEMPO
+           ========================================================= */
+
+        .timeline {
+
+            border-left:
+                4px solid
+                var(--terracota);
+
+            padding-left: 25px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .evento {
+
+            position: relative;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .evento::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 13px;
+
+            height: 13px;
+
+            border-radius: 50%;
+
+            background: var(--terracota);
+
+            left: -33px;
+
+            top: 7px;
+
+        }
+
+
+        .evento h3 {
+
+            margin-top: 0;
+
+        }
+
+
+        /* =========================================================
+           CHECKLIST
+           ========================================================= */
+
+        .checklist {
+
+            display: grid;
+
+            gap: 10px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .check {
+
+            background: var(--creme);
+
+            padding: 14px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+        }
+
+
+        .check input {
+
+            margin-right: 8px;
+
+        }
+
+
+        .barra-fundo {
+
+            width: 100%;
+
+            height: 18px;
+
+            background: var(--cinza-claro);
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            margin-top: 20px;
+
+        }
+
+
+        .barra {
+
+            width: 0%;
+
+            height: 100%;
+
+            background: var(--terracota);
+
+            transition: 0.4s;
+
+        }
+
+
+        #progressoTexto {
+
+            margin-top: 10px;
+
+            font-weight: bold;
+
+            color: var(--marrom);
+
+        }
+
+
+        /* =========================================================
+           BOTÕES
+           ========================================================= */
+
+        .botoes {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 20px;
+
+        }
+
+
+        button {
+
+            border: none;
+
+            padding: 13px 20px;
+
+            border-radius: 9px;
+
+            background: var(--terracota);
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+        }
+
+
+        button:hover {
+
+            background: var(--marrom);
+
+        }
+
+
+        .botao-secundario {
+
+            background: var(--cinza);
+
+        }
+
+
+        /* =========================================================
+           CONCLUSÃO
+           ========================================================= */
+
+        .conclusao {
+
+            background: var(--cinza);
+
+            color: white;
+
+        }
+
+
+        .conclusao h2 {
+
+            color: white;
+
+            border-color:
+                rgba(255,255,255,0.3);
+
+        }
+
+
+        .conclusao p {
+
+            color: #F2ECE6;
+
+        }
+
+
+        /* =========================================================
+           RODAPÉ
+           ========================================================= */
+
+        footer {
+
+            background: var(--escuro);
+
+            color: #C9C2BB;
+
+            text-align: center;
+
+            padding: 35px 20px;
+
+        }
+
+
+        footer strong {
+
+            color: var(--creme);
+
+        }
+
+
+        /* =========================================================
+           BOTÃO VOLTAR AO TOPO
+           ========================================================= */
+
+        #topo {
+
+            position: fixed;
+
+            right: 20px;
+
+            bottom: 20px;
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 50%;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: var(--marrom);
+
+            color: white;
+
+            font-size: 20px;
+
+            z-index: 2000;
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVIDADE
+           ========================================================= */
+
+        @media (max-width: 800px) {
+
+            header h1 {
+
+                font-size: 30px;
+
+            }
+
+
+            .resumo {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .informacoes {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .resultado {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .resumo {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            main {
+
+                width: 94%;
+
+            }
+
+
+            section {
+
+                padding: 23px;
+
+            }
+
+
+            nav a {
+
+                display: inline-block;
+
+                margin: 4px;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           IMPRESSÃO
+           ========================================================= */
+
+        @media print {
+
+            nav,
+            button,
+            #topo {
+
+                display: none !important;
+
+            }
+
+
+            body {
+
+                background: white;
+
+            }
+
+
+            section {
+
+                box-shadow: none;
+
+                break-inside: avoid;
+
+            }
+
+
+            header {
+
+                background: var(--escuro) !important;
+
+                -webkit-print-color-adjust: exact;
+
+                print-color-adjust: exact;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         CABEÇALHO
+         ========================================================= -->
+
+    <header id="inicio">
+
+        <div class="categoria">
+
+            ANÁLISE TÉCNICA • ARTEFATO DIGITAL
+
+        </div>
+
+
+        <h1>
+
+            Deepfake, Manipulação Digital
+            e Desinformação Eleitoral
+
+        </h1>
+
+
+        <p>
+
+            Análise baseada na checagem publicada pelo
+            UOL Confere em 12 de agosto de 2026 sobre uma
+            publicação falsa que atribuía à CNN Brasil uma
+            suposta denúncia de fraude nas eleições de 2022.
+
+        </p>
+
+    </header>
+
+
+    <!-- =========================================================
+         MENU
+         ========================================================= -->
+
+    <nav>
+
+        <a href="#artefato">
+            Artefato
+        </a>
+
+        <a href="#analise">
+            Análise
+        </a>
+
+        <a href="#evidencias">
+            Evidências
+        </a>
+
+        <a href="#impacto">
+            Impacto
+        </a>
+
+        <a href="#verificacao">
+            Verificação
+        </a>
+
+        <a href="#conclusao">
+            Conclusão
+        </a>
+
+    </nav>
+
+
+    <main>
+
+
+        <!-- =====================================================
+             RESUMO
+             ===================================================== -->
+
+        <div class="resumo">
+
+
+            <div class="card">
+
+                <h3>
+                    TIPO
+                </h3>
+
+                <strong>
+                    Artefato manipulado
+                </strong>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    CONTEXTO
+                </h3>
+
+                <strong>
+                    Eleições 2022
+                </strong>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    TECNOLOGIA
+                </h3>
+
+                <strong>
+                    IA não confirmada
+                </strong>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    IMPACTO
+                </h3>
+
+                <strong>
+                    Nacional
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             ARTEFATO
+             ===================================================== -->
+
+        <section class="artefato" id="artefato">
+
+
+            <h2>
+                01. Identificação do artefato digital
+            </h2>
+
+
+            <p>
+
+                O artefato analisado é uma publicação que circulou
+                nas redes sociais apresentando uma imagem da
+                jornalista Larissa Rodrigues, da CNN Brasil,
+                acompanhada de uma manchete falsa que afirmava
+                que a emissora teria revelado uma suposta fraude
+                nas eleições presidenciais de 2022.
+
+            </p>
+
+
+            <div class="informacoes">
+
+
+                <div class="info">
+
+                    <span>
+                        TIPO
+                    </span>
+
+                    <strong>
+                        Imagem / postagem manipulada
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <span>
+                        TEMA
+                    </span>
+
+                    <strong>
+                        Suposta fraude eleitoral
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <span>
+                        VEÍCULOS DE CIRCULAÇÃO
+                    </span>
+
+                    <strong>
+                        Redes sociais e aplicativos de mensagens
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <span>
+                        IMPACTO POTENCIAL
+                    </span>
+
+                    <strong>
+                        Formação de opinião pública
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="aviso">
+
+                <strong>
+                    Observação técnica:
+                </strong>
+
+                A fonte analisada confirma que a publicação é
+                enganosa e que a imagem foi manipulada. Isso,
+                por si só, não permite afirmar que a imagem tenha
+                sido criada por inteligência artificial. Portanto,
+                nesta análise, o termo "deepfake" é tratado como
+                hipótese de categoria tecnológica, enquanto o
+                caso comprovado pela checagem é de manipulação
+                e desinformação.
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             DESCRIÇÃO
+             ===================================================== -->
+
+        <section id="analise">
+
+
+            <h2>
+                02. O que a publicação afirmava?
+            </h2>
+
+
+            <p>
+
+                A publicação apresentava uma imagem da jornalista
+                Larissa Rodrigues como se ela estivesse vinculada
+                a uma notícia urgente sobre uma suposta fraude nas
+                eleições presidenciais de 2022.
+
+            </p>
+
+
+            <p>
+
+                A mensagem sugeria que a CNN Brasil teria
+                confirmado uma fraude e que o resultado da eleição
+                teria sido diferente do resultado oficial.
+
+            </p>
+
+
+            <p>
+
+                Segundo o UOL Confere, essa afirmação é falsa.
+                A CNN Brasil não publicou a suposta notícia sobre
+                fraude eleitoral.
+
+            </p>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             O QUE FOI VERIFICADO
+             ===================================================== -->
+
+        <section id="evidencias">
+
+
+            <h2>
+                03. Análise das evidências
+            </h2>
+
+
+            <div class="resultado">
+
+
+                <div class="resultado-card verdade">
+
+                    <h3>
+                        FATO VERIFICADO
+                    </h3>
+
+                    <p>
+
+                        A imagem utilizada na publicação não
+                        corresponde a uma notícia da CNN Brasil
+                        sobre fraude nas eleições de 2022.
+
+                    </p>
+
+                </div>
+
+
+                <div class="resultado-card risco">
+
+                    <h3>
+                        ELEMENTO ENGANOSO
+                    </h3>
+
+                    <p>
+
+                        A imagem e a manchete foram combinadas
+                        para criar a aparência de uma notícia
+                        jornalística verdadeira.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="tabela">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Evidência
+                            </th>
+
+                            <th>
+                                Resultado
+                            </th>
+
+                            <th>
+                                Relevância
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td>
+                                Suposta notícia da CNN
+                            </td>
+
+                            <td>
+                                Não localizada
+                            </td>
+
+                            <td>
+                                Muito alta
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Imagem da jornalista
+                            </td>
+
+                            <td>
+                                Utilizada fora do contexto original
+                            </td>
+
+                            <td>
+                                Alta
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Manchete sobre fraude
+                            </td>
+
+                            <td>
+                                Manipulada
+                            </td>
+
+                            <td>
+                                Muito alta
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Suposta fraude eleitoral
+                            </td>
+
+                            <td>
+                                Não comprovada
+                            </td>
+
+                            <td>
+                                Muito alta
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Uso de inteligência artificial
+                            </td>
+
+                            <td>
+                                Não confirmado pela checagem
+                            </td>
+
+                            <td>
+                                Alta
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             ORIGEM DA IMAGEM
+             ===================================================== -->
+
+        <section>
+
+
+            <h2>
+                04. Descoberta da origem do conteúdo
+            </h2>
+
+
+            <p>
+
+                Uma parte importante da investigação consiste em
+                descobrir de onde veio a imagem utilizada na
+                publicação enganosa.
+
+            </p>
+
+
+            <p>
+
+                A checagem da AFP encontrou a gravação original
+                utilizada como referência. O material envolvendo
+                a jornalista estava relacionado a outro assunto
+                jornalístico e não apresentava uma denúncia de
+                fraude nas eleições de 2022.
+
+            </p>
+
+
+            <p>
+
+                Isso demonstra uma técnica comum de desinformação:
+                utilizar um elemento visual verdadeiro, mas
+                apresentá-lo acompanhado de texto falso ou fora
+                do contexto original.
+
+            </p>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             LINHA DO TEMPO
+             ===================================================== -->
+
+        <section>
+
+
+            <h2>
+                05. Linha de análise do artefato
+            </h2>
+
+
+            <div class="timeline">
+
+
+                <div class="evento">
+
+                    <h3>
+                        1 — Conteúdo original
+                    </h3>
+
+                    <p>
+
+                        Existe um registro audiovisual legítimo
+                        envolvendo a jornalista.
+
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <h3>
+                        2 — Recorte da imagem
+                    </h3>
+
+                    <p>
+
+                        Uma imagem da jornalista é retirada de
+                        seu contexto original.
+
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <h3>
+                        3 — Alteração
+                    </h3>
+
+                    <p>
+
+                        Uma manchete falsa é associada à imagem,
+                        criando uma aparência de notícia.
+
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <h3>
+                        4 — Disseminação
+                    </h3>
+
+                    <p>
+
+                        A publicação passa a circular em redes
+                        sociais e aplicativos de mensagens.
+
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <h3>
+                        5 — Checagem
+                    </h3>
+
+                    <p>
+
+                        Agências de verificação analisam a origem
+                        do material e demonstram que a alegação
+                        é falsa.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             IMPACTO NACIONAL
+             ===================================================== -->
+
+        <section id="impacto">
+
+
+            <h2>
+                06. Impacto potencial em escala nacional
+            </h2>
+
+
+            <p>
+
+                O impacto do artefato pode ultrapassar o alcance
+                individual de uma publicação, pois o conteúdo
+                envolve uma instituição jornalística conhecida e
+                um tema de grande relevância pública.
+
+            </p>
+
+
+            <h3>
+                Impacto político
+            </h3>
+
+            <p>
+
+                Uma falsa confirmação de fraude pode influenciar
+                percepções sobre candidatos e sobre o processo
+                eleitoral.
+
+            </p>
+
+
+            <h3>
+                Impacto social
+            </h3>
+
+            <p>
+
+                Conteúdos desse tipo podem aumentar conflitos,
+                polarização e desconfiança entre diferentes grupos.
+
+            </p>
+
+
+            <h3>
+                Impacto institucional
+            </h3>
+
+            <p>
+
+                A utilização indevida da imagem de um veículo
+                jornalístico pode reduzir a confiança do público
+                em informações verdadeiras.
+
+            </p>
+
+
+            <h3>
+                Impacto informacional
+            </h3>
+
+            <p>
+
+                Quando uma publicação falsa aparenta ser uma
+                notícia profissional, pode ser mais difícil para
+                o usuário perceber que está diante de uma
+                manipulação.
+
+            </p>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             CAUSA RAIZ
+             ===================================================== -->
+
+        <section>
+
+
+            <h2>
+                07. Causa raiz da desinformação
+            </h2>
+
+
+            <p>
+
+                A causa raiz pode ser compreendida como a combinação
+                entre manipulação de conteúdo, circulação rápida
+                nas plataformas digitais e dificuldade de parte
+                dos usuários em verificar a origem da informação.
+
+            </p>
+
+
+            <ul>
+
+                <li>
+                    Uso de imagem verdadeira fora do contexto;
+                </li>
+
+                <li>
+                    Criação de manchete enganosa;
+                </li>
+
+                <li>
+                    Apelo emocional relacionado às eleições;
+                </li>
+
+                <li>
+                    Compartilhamento rápido;
+                </li>
+
+                <li>
+                    Aparência de conteúdo jornalístico;
+                </li>
+
+                <li>
+                    Ausência de verificação da fonte original.
+                </li>
+
+            </ul>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             CHECKLIST
+             ===================================================== -->
+
+        <section id="verificacao">
+
+
+            <h2>
+                08. Checklist de verificação
+            </h2>
+
+
+            <p>
+
+                Utilize o checklist abaixo para demonstrar
+                as etapas necessárias para analisar um artefato
+                digital suspeito.
+
+            </p>
+
+
+            <div class="checklist">
+
+
+                <label class="check">
+
+                    <input
+                        type="checkbox"
+                        class="caixa"
+                    >
+
+                    Identificar quem publicou originalmente.
+
+                </label>
+
+
+                <label class="check">
+
+                    <input
+                        type="checkbox"
+                        class="caixa"
+                    >
+
+                    Verificar a data da publicação.
+
+                </label>
+
+
+                <label class="check">
+
+                    <input
+                        type="checkbox"
+                        class="caixa"
+                    >
+
+                    Procurar a fonte original da imagem.
+
+                </label>
+
+
+                <label class="check">
+
+                    <input
+                        type="checkbox"
+                        class="caixa"
+                    >
+
+                    Comparar a imagem com o conteúdo original.
+
+                </label>
+
+
+                <label class="check">
+
+                    <input
+                        type="checkbox"
+                        class="caixa"
+                    >
+
+                    Conferir se o veículo realmente publicou a notícia.
+
+                </label>
+
+
+                <label class="check">
+
+                    <input
+                        type="checkbox"
+                        class="caixa"
+                    >
+
+                    Verificar o contexto do material.
+
+                </label>
+
+
+                <label class="check">
+
+                    <input
+                        type="checkbox"
+                        class="caixa"
+                    >
+
+                    Consultar organizações de checagem.
+
+                </label>
+
+
+            </div>
+
+
+            <div class="barra-fundo">
+
+                <div
+                    class="barra"
+                    id="barra"
+                ></div>
+
+            </div>
+
+
+            <p id="progressoTexto">
+
+                0% da análise concluída.
+
+            </p>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             CLASSIFICAÇÃO
+             ===================================================== -->
+
+        <section>
+
+
+            <h2>
+                09. Classificação técnica
+            </h2>
+
+
+            <div class="resultado">
+
+
+                <div class="resultado-card risco">
+
+                    <h3>
+                        CLASSIFICAÇÃO
+                    </h3>
+
+                    <p>
+
+                        <strong>
+                            DESINFORMAÇÃO / MANIPULAÇÃO DIGITAL
+                        </strong>
+
+                    </p>
+
+                    <p>
+
+                        O conteúdo utiliza elementos reais
+                        associados a uma informação falsa.
+
+                    </p>
+
+                </div>
+
+
+                <div class="resultado-card verdade">
+
+                    <h3>
+                        IA / DEEPFAKE
+                    </h3>
+
+                    <p>
+
+                        <strong>
+                            NÃO CONFIRMADO
+                        </strong>
+
+                    </p>
+
+                    <p>
+
+                        A checagem disponível comprova a
+                        manipulação, mas não estabelece que
+                        inteligência artificial tenha sido
+                        utilizada para produzir o material.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             RECOMENDAÇÕES
+             ===================================================== -->
+
+        <section>
+
+
+            <h2>
+                10. Recomendações
+            </h2>
+
+
+            <h3>
+                Para usuários
+            </h3>
+
+            <ul>
+
+                <li>
+                    Não compartilhar imediatamente conteúdos
+                    relacionados a acusações eleitorais.
+                </li>
+
+                <li>
+                    Procurar a publicação original.
+                </li>
+
+                <li>
+                    Conferir se o veículo realmente publicou
+                    a informação.
+                </li>
+
+                <li>
+                    Comparar a informação com fontes independentes.
+                </li>
+
+                <li>
+                    Desconfiar de imagens com manchetes muito
+                    sensacionalistas.
+                </li>
+
+            </ul>
+
+
+            <h3>
+                Para escolas
+            </h3>
+
+            <ul>
+
+                <li>
+                    Ensinar verificação de fontes.
+                </li>
+
+                <li>
+                    Trabalhar educação midiática.
+                </li>
+
+                <li>
+                    Ensinar a diferença entre conteúdo verdadeiro,
+                    falso, manipulado e fora de contexto.
+                </li>
+
+            </ul>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             CONCLUSÃO
+             ===================================================== -->
+
+        <section class="conclusao" id="conclusao">
+
+
+            <h2>
+                11. Conclusão da análise
+            </h2>
+
+
+            <p>
+
+                O artefato analisado apresenta características
+                de uma peça de desinformação eleitoral: uma imagem
+                verdadeira é associada a uma manchete falsa para
+                produzir a aparência de uma notícia jornalística.
+
+            </p>
+
+
+            <p>
+
+                A investigação publicada pelo UOL Confere concluiu
+                que a CNN Brasil não noticiou a suposta fraude nas
+                eleições de 2022. A checagem também aponta que a
+                imagem utilizada na publicação não representa a
+                alegação apresentada.
+
+            </p>
+
+
+            <p>
+
+                Do ponto de vista técnico, é importante diferenciar
+                "manipulação digital" de "deepfake". Embora um
+                conteúdo possa utilizar técnicas de inteligência
+                artificial, a existência de IA precisa ser demonstrada
+                por evidências. Neste caso, a evidência disponível
+                sustenta a classificação como conteúdo enganoso e
+                manipulado, mas não permite afirmar, sozinha, que
+                tenha sido produzido por IA.
+
+            </p>
+
+
+            <p>
+
+                O caso demonstra como a combinação de imagem,
+                texto, aparência jornalística e circulação em redes
+                sociais pode criar uma narrativa falsa com potencial
+                de alcançar grande número de pessoas.
+
+            </p>
+
+
+            <p>
+
+                Portanto, a principal medida de prevenção é verificar
+                a origem, o contexto e a fonte original antes de
+                compartilhar uma informação, especialmente quando
+                ela envolve eleições e instituições públicas.
+
+            </p>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             BOTÕES
+             ===================================================== -->
+
+        <div class="botoes">
+
+
+            <button onclick="imprimirPagina()">
+
+                🖨️ Imprimir / Salvar PDF
+
+            </button>
+
+
+            <button
+                class="botao-secundario"
+                onclick="voltarInicio()"
+            >
+
+                ↑ Voltar ao início
+
+            </button>
+
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================================================
+         RODAPÉ
+         ========================================================= -->
+
+    <footer>
+
+        <p>
+
+            <strong>
+                Relatório Técnico
+            </strong>
+
+        </p>
+
+
+        <p>
+
+            Análise de artefato digital,
+            deepfake e desinformação eleitoral
+
+        </p>
+
+
+        <p>
+
+            Caso analisado:
+            UOL Confere — 12/08/2026
+
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================================
+         BOTÃO FLUTUANTE
+         ========================================================= -->
+
+    <button
+        id="topo"
+        onclick="voltarInicio()"
+    >
+
+        ↑
+
+    </button>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
+
+    <script>
+
+
+        /* =====================================================
+           CHECKLIST
+           ===================================================== */
+
+        const caixas =
+            document.querySelectorAll(".caixa");
+
+
+        const barra =
+            document.getElementById("barra");
+
+
+        const textoProgresso =
+            document.getElementById(
+                "progressoTexto"
+            );
+
+
+        function atualizarProgresso() {
+
+
+            let marcados = 0;
+
+
+            caixas.forEach(
+                function(caixa) {
+
+                    if (caixa.checked) {
+
+                        marcados++;
+
+                    }
+
+                }
+            );
+
+
+            const total =
+                caixas.length;
+
+
+            const porcentagem =
+                Math.round(
+                    (marcados / total) * 100
+                );
+
+
+            barra.style.width =
+                porcentagem + "%";
+
+
+            textoProgresso.innerText =
+                porcentagem +
+                "% da análise concluída.";
+
+
+            if (porcentagem === 100) {
+
+                textoProgresso.innerText =
+                    "100% da análise concluída — checklist finalizado.";
+
+            }
+
+        }
+
+
+        caixas.forEach(
+            function(caixa) {
+
+                caixa.addEventListener(
+                    "change",
+                    atualizarProgresso
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           IMPRESSÃO
+           ===================================================== */
+
+        function imprimirPagina() {
+
+            window.print();
+
+        }
+
+
+        /* =====================================================
+           VOLTAR AO INÍCIO
+           ===================================================== */
+
+        function voltarInicio() {
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+        /* =====================================================
+           BOTÃO FLUTUANTE
+           ===================================================== */
+
+        const botaoTopo =
+            document.getElementById(
+                "topo"
+            );
+
+
+        window.addEventListener(
+            "scroll",
+            function() {
+
+
+                if (window.scrollY > 400) {
+
+                    botaoTopo.style.display =
+                        "flex";
+
+                }
+
+                else {
+
+                    botaoTopo.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           ANIMAÇÃO DAS SEÇÕES
+           ===================================================== */
+
+        const secoes =
+            document.querySelectorAll(
+                "section"
+            );
+
+
+        const observador =
+            new IntersectionObserver(
+
+                function(entradas) {
+
+
+                    entradas.forEach(
+                        function(entrada) {
+
+
+                            if (
+                                entrada.isIntersecting
+                            ) {
+
+
+                                entrada.target.style.opacity =
+                                    "1";
+
+
+                                entrada.target.style.transform =
+                                    "translateY(0)";
+
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+
+                    threshold: 0.08
+
+                }
+
+            );
+
+
+        secoes.forEach(
+            function(secao) {
+
+
+                secao.style.opacity =
+                    "0";
+
+
+                secao.style.transform =
+                    "translateY(15px)";
+
+
+                secao.style.transition =
+                    "opacity 0.5s ease, transform 0.5s ease";
+
+
+                observador.observe(
+                    secao
+                );
+
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
